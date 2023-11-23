@@ -1,3 +1,4 @@
+#!/work/home/zhanghongning/software/ProteinMPNN/8907e66/.conda/bin/python3
 import argparse
 
 def main(args):

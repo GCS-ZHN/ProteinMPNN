@@ -1,3 +1,4 @@
+#!/work/home/zhanghongning/software/ProteinMPNN/8907e66/.conda/bin/python3
 from __future__ import print_function
 import json, time, os, sys, glob
 import shutil
@@ -12,6 +13,8 @@ import torch.nn as nn
 import torch.nn.functional as F
 import random
 import itertools
+from filelock import FileLock
+from contextlib import contextmanager
 
 #A number of functions/classes are adopted from: https://github.com/jingraham/neurips19-graph-protein-design
 
@@ -1360,3 +1363,12 @@ class ProteinMPNN(nn.Module):
         log_probs = F.log_softmax(logits, dim=-1)
         return log_probs
 
+
+@contextmanager
+def locked_open(file, mode, *args, **kwargs):
+    with FileLock(f"{file}.lock"):
+        f = open(file, mode, *args, **kwargs)
+        try:
+            yield f
+        finally:
+            f.close()
