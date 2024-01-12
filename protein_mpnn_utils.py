@@ -1,4 +1,3 @@
-#!/work/home/zhanghongning/software/ProteinMPNN/8907e66/.conda/bin/python3
 from __future__ import print_function
 import json, time, os, sys, glob
 import shutil
